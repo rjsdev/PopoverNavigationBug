@@ -78,4 +78,14 @@
     [self pushViewController:newTableViewController animated:YES];
 }
 
+#pragma mark UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController
+      willShowViewController:(UIViewController *)viewController
+                    animated:(BOOL)animated
+{
+    BOOL hideNavigationBar = ( viewController == self.viewControllers[0] ) ? YES : NO;
+    [navigationController setNavigationBarHidden:hideNavigationBar animated:animated];
+}
+
 @end
