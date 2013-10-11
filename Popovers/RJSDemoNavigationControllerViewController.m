@@ -8,7 +8,7 @@
 
 #import "RJSDemoNavigationControllerViewController.h"
 
-@interface RJSDemoNavigationControllerViewController ()
+@interface RJSDemoNavigationControllerViewController ()<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -18,8 +18,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-    }
+        UITableViewController * searchResultsNavigationRootTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+        
+        searchResultsNavigationRootTableViewController.tableView.dataSource = self;
+        searchResultsNavigationRootTableViewController.tableView.delegate = self;
+        
+        [self pushViewController:searchResultsNavigationRootTableViewController animated:NO];
+
+        self.delegate = self;
+        self.navigationBarHidden = YES;
+}
     return self;
 }
 
@@ -33,6 +41,41 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger result = 10;
+    return result;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell * result = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    if (!result)
+    {
+        result = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        result.textLabel.text = @"Some random cell text";
+        result.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    return result;
+}
+
+#pragma mark UITableView delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewController * newTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    newTableViewController.tableView.dataSource = self;
+    newTableViewController.tableView.delegate = self;
+    
+    [self pushViewController:newTableViewController animated:YES];
 }
 
 @end
