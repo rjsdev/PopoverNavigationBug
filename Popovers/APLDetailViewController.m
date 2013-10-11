@@ -50,7 +50,7 @@
 #import "APLPopoverContentViewController.h"
 
 
-@interface APLDetailViewController ()
+@interface APLDetailViewController ()<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) UIPopoverController *barButtonItemPopover;
@@ -126,7 +126,8 @@
 {
     [super viewDidLoad];
 	
-	APLPopoverContentViewController *content = [self.storyboard instantiateViewControllerWithIdentifier:@"PopoverContentController"];
+//	APLPopoverContentViewController *content = [self.storyboard instantiateViewControllerWithIdentifier:@"PopoverContentController"];
+	UIViewController *content = self.navigationPopoverContentController;
 
 	// Setup the popover for use in the detail view.
 	self.detailViewPopover = [[UIPopoverController alloc] initWithContentViewController:content];
@@ -206,6 +207,52 @@
 {
     // Update the user interface for the detail item.
     self.detailLabel.text = self.detailItem;
+}
+
+- (UIViewController *)navigationPopoverContentController
+{
+    UINavigationController * result = nil;
+
+    UITableViewController * searchResultsNavigationRootTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    searchResultsNavigationRootTableViewController.tableView.dataSource = self;
+    searchResultsNavigationRootTableViewController.tableView.delegate = self;
+    
+    result = [[UINavigationController alloc] initWithRootViewController:searchResultsNavigationRootTableViewController];
+    
+    result.delegate = self;
+    result.navigationBarHidden = YES;
+
+    return result;
+}
+
+#pragma mark UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger result = 10;
+    return result;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell * result = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    if (!result)
+    {
+        result = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        result.textLabel.text = @"Some random cell text";
+        result.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    return result;
+}
+
+#pragma mark UITableView delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 }
 
 
