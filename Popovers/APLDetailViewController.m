@@ -62,6 +62,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *detailLabel;
 
+@property (nonatomic, strong) UINavigationController * navigationPopoverContentController;
+
 @end
 
 
@@ -127,15 +129,15 @@
     [super viewDidLoad];
 	
 //	APLPopoverContentViewController *content = [self.storyboard instantiateViewControllerWithIdentifier:@"PopoverContentController"];
-	UIViewController *content = self.navigationPopoverContentController;
+	self.navigationPopoverContentController = self.navigationPopoverContentController;
 
 	// Setup the popover for use in the detail view.
-	self.detailViewPopover = [[UIPopoverController alloc] initWithContentViewController:content];
+	self.detailViewPopover = [[UIPopoverController alloc] initWithContentViewController:self.navigationPopoverContentController];
 	self.detailViewPopover.popoverContentSize = CGSizeMake(320., 320.);
 	self.detailViewPopover.delegate = self;
 	
 	// Setup the popover for use from the navigation bar.
-	self.barButtonItemPopover = [[UIPopoverController alloc] initWithContentViewController:content];
+	self.barButtonItemPopover = [[UIPopoverController alloc] initWithContentViewController:self.navigationPopoverContentController];
 	self.barButtonItemPopover.popoverContentSize = CGSizeMake(320., 320.);
 	self.barButtonItemPopover.delegate = self;
 }
@@ -209,7 +211,7 @@
     self.detailLabel.text = self.detailItem;
 }
 
-- (UIViewController *)navigationPopoverContentController
+- (UINavigationController *)navigationPopoverContentController
 {
     UINavigationController * result = nil;
 
@@ -221,7 +223,7 @@
     result = [[UINavigationController alloc] initWithRootViewController:searchResultsNavigationRootTableViewController];
     
     result.delegate = self;
-    result.navigationBarHidden = YES;
+//    result.navigationBarHidden = YES;
 
     return result;
 }
@@ -253,7 +255,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewController * newTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    newTableViewController.tableView.dataSource = self;
+    newTableViewController.tableView.delegate = self;
+    
+    [self.navigationPopoverContentController pushViewController: [self.storyboard instantiateViewControllerWithIdentifier:@"PopoverContentController"]
+                                                       animated:YES];
 }
-
 
 @end
