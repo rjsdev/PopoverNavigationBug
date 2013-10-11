@@ -18,6 +18,7 @@
 		288A79E917CDC1FF0003B2C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288A79E717CDC1FF0003B2C1 /* Main.storyboard */; };
 		288A79EC17CDC1FF0003B2C1 /* APLMasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288A79EB17CDC1FF0003B2C1 /* APLMasterTableViewController.m */; };
 		288A79EE17CDC1FF0003B2C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288A79ED17CDC1FF0003B2C1 /* Images.xcassets */; };
+		E1FBD42018079DB600B1FE6A /* RJSDemoNavigationControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FBD41F18079DB600B1FE6A /* RJSDemoNavigationControllerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		288A79EA17CDC1FF0003B2C1 /* APLMasterTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APLMasterTableViewController.h; sourceTree = "<group>"; };
 		288A79EB17CDC1FF0003B2C1 /* APLMasterTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APLMasterTableViewController.m; sourceTree = "<group>"; };
 		288A79ED17CDC1FF0003B2C1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E1FBD41E18079DB600B1FE6A /* RJSDemoNavigationControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJSDemoNavigationControllerViewController.h; sourceTree = "<group>"; };
+		E1FBD41F18079DB600B1FE6A /* RJSDemoNavigationControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJSDemoNavigationControllerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 				2862E31717CDC43000B86F0C /* APLPopoverContentViewController.h */,
 				2862E31817CDC43000B86F0C /* APLPopoverContentViewController.m */,
 				288A79E717CDC1FF0003B2C1 /* Main.storyboard */,
+				E1FBD41E18079DB600B1FE6A /* RJSDemoNavigationControllerViewController.h */,
+				E1FBD41F18079DB600B1FE6A /* RJSDemoNavigationControllerViewController.m */,
 				288A79E417CDC1FF0003B2C1 /* APLAppDelegate.h */,
 				288A79E517CDC1FF0003B2C1 /* APLAppDelegate.m */,
 				288A79ED17CDC1FF0003B2C1 /* Images.xcassets */,
@@ -180,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				288A79E617CDC1FF0003B2C1 /* APLAppDelegate.m in Sources */,
+				E1FBD42018079DB600B1FE6A /* RJSDemoNavigationControllerViewController.m in Sources */,
 				288A79EC17CDC1FF0003B2C1 /* APLMasterTableViewController.m in Sources */,
 				288A79E217CDC1FF0003B2C1 /* main.m in Sources */,
 				2862E31A17CDC43000B86F0C /* APLPopoverContentViewController.m in Sources */,

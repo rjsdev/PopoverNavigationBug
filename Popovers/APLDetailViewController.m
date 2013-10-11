@@ -48,9 +48,9 @@
 #import "APLDetailViewController.h"
 #import "APLMasterTableViewController.h"
 #import "APLPopoverContentViewController.h"
+#import "RJSDemoNavigationControllerViewController.h"
 
-
-@interface APLDetailViewController ()<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate>
+@interface APLDetailViewController ()
 
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) UIPopoverController *barButtonItemPopover;
@@ -213,55 +213,12 @@
 
 - (UINavigationController *)navigationPopoverContentController
 {
-    UINavigationController * result = nil;
-
-    UITableViewController * searchResultsNavigationRootTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-    
-    searchResultsNavigationRootTableViewController.tableView.dataSource = self;
-    searchResultsNavigationRootTableViewController.tableView.delegate = self;
-    
-    result = [[UINavigationController alloc] initWithRootViewController:searchResultsNavigationRootTableViewController];
-    
-    result.delegate = self;
-//    result.navigationBarHidden = YES;
-
-    return result;
-}
-
-#pragma mark UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger result = 10;
-    return result;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	UITableViewCell * result = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
-    if (!result)
+    if (!_navigationPopoverContentController)
     {
-        result = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        result.textLabel.text = @"Some random cell text";
-        result.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        _navigationPopoverContentController = [[RJSDemoNavigationControllerViewController alloc] initWithNibName:nil bundle:nil];
     }
-    
-    return result;
-}
 
-#pragma mark UITableView delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewController * newTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-    
-    newTableViewController.tableView.dataSource = self;
-    newTableViewController.tableView.delegate = self;
-    
-    [self.navigationPopoverContentController pushViewController: [self.storyboard instantiateViewControllerWithIdentifier:@"PopoverContentController"]
-                                                       animated:YES];
+    return _navigationPopoverContentController;
 }
 
 @end
