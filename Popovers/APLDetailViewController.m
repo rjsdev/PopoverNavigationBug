@@ -129,14 +129,18 @@
     [super viewDidLoad];
 	
 //	APLPopoverContentViewController *content = [self.storyboard instantiateViewControllerWithIdentifier:@"PopoverContentController"];
+    
+    UIViewController *content = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    [content addChildViewController:self.navigationPopoverContentController];
+    [content.view addSubview:self.navigationPopoverContentController.view];
 
 	// Setup the popover for use in the detail view.
-	self.detailViewPopover = [[UIPopoverController alloc] initWithContentViewController:self.navigationPopoverContentController];
+	self.detailViewPopover = [[UIPopoverController alloc] initWithContentViewController:content];
 	self.detailViewPopover.popoverContentSize = CGSizeMake(320., 320.);
 	self.detailViewPopover.delegate = self;
 	
 	// Setup the popover for use from the navigation bar.
-	self.barButtonItemPopover = [[UIPopoverController alloc] initWithContentViewController:self.navigationPopoverContentController];
+	self.barButtonItemPopover = [[UIPopoverController alloc] initWithContentViewController:content];
 	self.barButtonItemPopover.popoverContentSize = CGSizeMake(320., 320.);
 	self.barButtonItemPopover.delegate = self;
 }
