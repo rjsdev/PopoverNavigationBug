@@ -129,7 +129,6 @@
     [super viewDidLoad];
 	
 //	APLPopoverContentViewController *content = [self.storyboard instantiateViewControllerWithIdentifier:@"PopoverContentController"];
-	self.navigationPopoverContentController = self.navigationPopoverContentController;
 
 	// Setup the popover for use in the detail view.
 	self.detailViewPopover = [[UIPopoverController alloc] initWithContentViewController:self.navigationPopoverContentController];
